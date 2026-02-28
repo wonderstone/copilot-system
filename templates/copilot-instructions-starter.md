@@ -51,6 +51,15 @@ When any of these topics appear in the user's message, **read the specified file
 | [new module / new script / implement X] | `docs/EXISTING_SYSTEMS_INDEX.md` | Functionality may already exist |
 | [topic specific to your project] | `[docs/RELEVANT_FILE.md]` | [specific consequence] |
 
+<!-- If your project has runtime config files that override source code defaults (YAML,
+     JSON, .env, etc.), add this table. See framework/04_KEYWORD_TRIGGERS.md for details. -->
+
+**Runtime Config Locations** *(optional — add if your project has config files that override code defaults)*:
+
+| Setting source | Runtime override file | Sync rule |
+|----------------|----------------------|-----------|
+| `[src/config.py]` defaults | `[~/.appname/config.yaml]` | Change both together |
+
 ---
 
 ## Rule 4: Document Taxonomy (🔴 Mandatory)

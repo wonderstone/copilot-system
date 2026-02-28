@@ -104,6 +104,48 @@ Replacement decisions must be documented:
 
 ---
 
+
+---
+
+## Runtime Configuration Sync
+
+One of the most reliably painful keyword trigger scenarios occurs when a project has
+**persisted runtime configuration** — YAML files, JSON configs, `.env` files, database
+settings — that override the defaults baked into source code.
+
+**The failure mode:**
+1. AI changes a flag default in source code (e.g., `enable_feature: bool = True`)
+2. The deployed runtime config file still has `enable_feature: false`
+3. Code review shows the right value; production runs the wrong one
+4. The bug is silent — no error, just wrong behavior
+
+This pattern appears across many stacks:
+- Python: `~/.appname/config.yaml` overrides dataclass defaults
+- Spring Boot: `application.yml` overrides `@Value` defaults
+- Django: `local_settings.py` overrides `settings.py`
+- Kubernetes: `ConfigMap` overrides container env defaults
+
+**The trigger to add to your project:**
+```markdown
+| Keyword | Must check | Consequence of skipping |
+|---------|------------|-------------------------|
+| change config / toggle flag / enable feature / flip default | Verify the runtime config file reflects the same value | Source code shows correct default; deployed config runs the old value silently |
+```
+
+**What to verify when the trigger fires:**
+1. Identify all files where this setting is stored (source default + runtime config)
+2. Update **both** in the same commit or operation
+3. If the runtime config location wasn’t obvious, record it in session_state decisions
+
+**Runtime Config Locations table** (add to `copilot-instructions.md`):
+```markdown
+## Runtime Config Locations
+| Setting source | Runtime override file | Sync rule |
+|----------------|----------------------|----------|
+| `src/config.py` defaults | `~/.appname/config.yaml` | Change both together |
+| `application.properties` | `config/local.yaml` | Change both together |
+```
+
 ## Why Triggers Beat Prompting
 
 The alternative is to write the conventions everywhere and hope the AI absorbs them. This doesn't work because:
