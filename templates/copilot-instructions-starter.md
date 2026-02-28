@@ -127,7 +127,25 @@ When idle: `📍 **Idle** | No active tasks`
 
 ---
 
-## Rule 9: Language
+## Rule 9: Observability-First Debug Loop (🔴 Mandatory)
+
+When investigating bugs, AI must **collect evidence before proposing fixes**:
+
+```
+1. Observe   → Logs, errors, state dumps — not guesses
+2. Localize  → Name the exact function/stage that fails
+3. Fix       → Minimal change at root cause
+4. Verify    → Re-run the full failing path
+5. Cleanup   → Remove debug instrumentation
+```
+
+Words like "probably" or "maybe" must be accompanied by a concrete data-collection next step.
+
+Read: [framework/07_OBSERVABILITY_FIRST_DEBUG.md]
+
+---
+
+## Rule 10: Language
 
 [Fill in your project's language requirements]
 

@@ -127,3 +127,24 @@ AI assistants cannot "scan" a docs folder and know which information is current.
 The taxonomy solves this by making **staleness visible through location**: if it's in `docs/archive/`, the AI knows to treat it as historical context, not current truth. If it's in `docs/` root, it's been deliberately maintained.
 
 This is especially critical for long-running projects where the AI accumulates references to old documents across many sessions.
+
+
+---
+
+## File Size Limits
+
+AI assistants generate large files effortlessly — a trait that harms both humans and future AI sessions. A 1,000-line Markdown document or an 800-line Python module is harder to navigate, review, and maintain.
+
+### Recommended Defaults
+
+| File Type | Max Lines | Split Strategy |
+|-----------|----------|----------------|
+| Markdown (`.md`) | 300 | Break into sub-documents linked from a hub page |
+| Source code | 400 | Split by responsibility / class / concern |
+| Test files | 500 | Split by feature or test category |
+
+### Rules
+
+1. **Split before writing** — when you know content will exceed the limit, plan the split first, then create multiple smaller files. Don't write a giant file and refactor later.
+2. **Hub-and-spoke for docs** — large documents become a short hub page that links to sub-pages. Each sub-page stays under the limit.
+3. **These are guidelines, not laws** — a 320-line Markdown file is fine if splitting would harm readability. The point is to prevent 800-line monsters, not to enforce exact numbers.

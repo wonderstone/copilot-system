@@ -25,13 +25,13 @@ Externalize everything the AI needs to do its job into a small set of structured
 
 This repo contains:
 
-1. **Framework** — Six universal patterns distilled from long-running real projects
+1. **Framework** — Seven universal patterns distilled from long-running real projects
 2. **Templates** — Copy-paste starting points for every required file
 3. **Examples** — Real project applications of the framework (generalized)
 
 ---
 
-## The Six Patterns
+## The Seven Patterns
 
 | # | Pattern | What It Solves |
 |---|---------|----------------|
@@ -41,6 +41,7 @@ This repo contains:
 | [04](framework/04_KEYWORD_TRIGGERS.md) | **Keyword Trigger Pattern** | AI ignoring project conventions |
 | [05](framework/05_CROSS_PROJECT_PROTOCOL.md) | **Cross-Project Protocol Pattern** | Integration mismatches between teams |
 | [06](framework/06_CHALLENGE_AND_VERIFY.md) | **Challenge & Verify Pattern** | Silent errors from unchallenged wrong premises |
+| [07](framework/07_OBSERVABILITY_FIRST_DEBUG.md) | **Observability-First Debug Loop** | Speculative fixes that compound bugs |
 
 These patterns are **independent** — adopt any subset. They compose well, but none requires the others.
 
