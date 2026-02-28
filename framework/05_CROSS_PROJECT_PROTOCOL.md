@@ -224,3 +224,14 @@ A dedicated git repo is cleaner for distributed teams. A shared local directory 
 - The overhead of git hosting is not worth it at this stage
 
 The pattern is identical either way — the directory structure, lifecycle, and metadata conventions all apply. When the project grows to need a proper repo, convert the local directory to a git remote without changing the file structure.
+
+---
+
+## See Also
+
+**[Framework 08 — Async Thread Protocol](08_ASYNC_THREAD_PROTOCOL.md)**
+
+Once both teams are working from a shared protocol document, they will need to
+resolve open questions before coding begins. Framework 08 defines how to do that
+using one-file-per-question, tracked by filename and frontmatter rather than
+in-place annotation of the protocol document itself.

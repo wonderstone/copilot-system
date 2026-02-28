@@ -42,6 +42,7 @@ This repo contains:
 | [05](framework/05_CROSS_PROJECT_PROTOCOL.md) | **Cross-Project Protocol Pattern** | Integration mismatches between teams |
 | [06](framework/06_CHALLENGE_AND_VERIFY.md) | **Challenge & Verify Pattern** | Silent errors from unchallenged wrong premises |
 | [07](framework/07_OBSERVABILITY_FIRST_DEBUG.md) | **Observability-First Debug Loop** | Speculative fixes that compound bugs |
+| [08](framework/08_ASYNC_THREAD_PROTOCOL.md) | **Async Thread Protocol** | Cross-team questions resolved by editing the same big document |
 
 These patterns are **independent** — adopt any subset. They compose well, but none requires the others.
 
