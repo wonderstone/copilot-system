@@ -37,9 +37,33 @@ The framework prioritizes a small set that's actually followed over a comprehens
 
 ---
 
-### What belongs in `examples/` vs `framework/`
+### What belongs in `framework/` vs `examples/` vs your own project
 
-- Tech-stack-specific rules → `examples/`
-- Universal patterns → `framework/`
+Use this test:
 
-If you're not sure which, it's probably `examples/`.
+**Ask: "Would this rule apply to a project in a completely different tech stack?"**
+
+| Answer | Where it belongs |
+|--------|-----------------|
+| Yes, it's about how AI and humans coordinate — not about any specific tool | `framework/` |
+| Yes, but only for projects of a certain type (game clients, microservices, etc.) | `examples/<type>/` |
+| No, it's about our specific tools, paths, or conventions | Your project's own `copilot-instructions.md` — nowhere else |
+
+**Concrete examples:**
+
+| Rule | Correct location | Why |
+|------|-----------------|-----|
+| "Update session_state after every completed sub-task" | `framework/` | True for any project with any AI |
+| "Read ROADMAP before starting any Phase work" | `framework/` | True regardless of tech stack |
+| "TYPE-C documents go in `docs/archive/`" | `framework/` | Universal document hygiene |
+| "Before implementing X, check if it already exists in the codebase" | `framework/` | Universal anti-duplication |
+| "Unity `.meta` files must not be deleted via terminal" | `examples/unity-*/` | Unity-specific |
+| "All LLM calls must go through `LLMFactory`" | `examples/python-ai-service/` | Project architecture-specific |
+| "Our gateway runs on port 6003" | Your project only | Specific to one deployment |
+| "DAZ lossyScale is 100, not 1" | Your project only | Specific to one toolchain |
+
+**The boundary in plain language:**
+
+- `framework/` = the *principle* ("don't re-implement what exists")
+- `examples/` = the *principle applied to a specific stack* ("in Unity, check `EXISTING_SYSTEMS_INDEX.md` before creating any `.cs` file")
+- Your project = the *principle applied to your specific codebase* ("before creating any `.cs` file, check `Docs/EXISTING_SYSTEMS_INDEX.md` — 92 scripts already exist")
