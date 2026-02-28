@@ -197,6 +197,25 @@ Once in `protocols/`, a document is considered a contract. Changes follow this f
 
 ---
 
+## Why This Pattern Exists
+
+Software is built to be used. Users make requests. Multiple systems end up talking to each other.
+
+The moment two systems need to communicate, there is a **contract** — whether you write it down or not. The only question is whether that contract lives in a shared document both sides have agreed to, or whether it lives in two separate implementations that each team believes reflects "what we agreed on."
+
+Without a neutral document:
+- Side A adds a required field. Side B doesn't know. Integration fails silently.
+- You rename a field for clarity. Both sides think their version is correct.
+- Three months later, nobody remembers which format was "the final one" agreed in a chat message.
+
+This happens in 1-person teams too — the single person manages both projects in separate sessions, and "what I remember agreeing on" drifts between them.
+
+**A defined communication channel between projects is not overhead. It is the minimum condition for two systems to stay compatible over time.**
+
+The pattern is intentionally minimal at small scale (one file, one rule: update both sides before the session ends). The shared directory is just a place both projects can point to. That's the whole thing.
+
+---
+
 ## Why Not a Shared Git Repository
 
 A dedicated git repo is cleaner for distributed teams. A shared local directory works when:
