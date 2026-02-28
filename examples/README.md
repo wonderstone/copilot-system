@@ -9,10 +9,14 @@ with project-specific details generalized into patterns.
 
 ## Available Examples
 
-| Example | Tech Stack | Interesting Aspects |
-|---------|-----------|---------------------|
-| [unity-game-client/](unity-game-client/) | C# / Unity | Long-running client with protected asset directories, Editor menu rules, HITL tuning tools |
-| [python-ai-service/](python-ai-service/) | Python / FastAPI | Multi-service architecture, LLM abstraction rules, Windows GPU deployment notes |
+No examples have been contributed yet. See below for how to contribute one.
+
+**Planned examples** (in progress):
+
+| Example | Tech Stack | Status |
+|---------|-----------|--------|
+| unity-game-client | C# / Unity / LLM integration | Generalization in progress |
+| python-ai-service | Python / FastAPI / LangGraph | Generalization in progress |
 
 ---
 
