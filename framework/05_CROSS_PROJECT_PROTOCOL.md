@@ -1,24 +1,70 @@
 # Framework 05 — Cross-Project Protocol Pattern
 
-> **The core problem**: Two teams build separate systems that must communicate.  
-> Each team implements their side based on verbal agreements or meeting notes.  
-> Integration day: the formats don't match, the field names are different, one side uses snake_case and the other camelCase.
+> **The core problem**: Two systems that must communicate are built independently.  
+> Each side implements based on memory, chat logs, or verbal agreement.  
+> Integration day: field names don't match, one side uses snake_case, the other camelCase, one side added a required field the other doesn't send.
+>
+> This problem is **not about team size**. A single person managing two projects is just as exposed as a 10-person team — more so, because the false confidence of "I know both sides" delays the moment of discovery.
 
 ---
 
-## The Pattern: A Shared Neutral Directory
+## The One Non-Negotiable Rule
 
-Create a directory **outside both project repositories** that both teams treat as a contract layer:
+> Interface documents live in a neutral location that both projects can read.  
+> Changes to a confirmed interface require both sides to update before the old behavior is removed.
+
+Everything else in this pattern is implementation detail that scales with team size and project complexity.
+
+---
+
+## Choose Your Scale
+
+### Minimal (1 person, 2 projects, same machine)
+
+```
+~/shared-protocols/
+└── DESKTOP_PET_PROTOCOL.md    ← Single file, both projects reference it
+```
+
+- No proposals/ or protocols/ split — one file per interface
+- No SemVer — use `-draft` / `-confirmed` suffixes in the filename or document header
+- Change process: edit the file, make sure you've updated both implementations before the session ends
+- Copilot instructions on both sides: add a keyword trigger pointing to this file
+
+**When to move up:** when you find yourself unsure which version of the interface each side has actually implemented.
+
+---
+
+### Standard (2+ people, or 1 person with async work across sessions)
 
 ```
 shared-protocols/
-├── README.md           ← Collaboration rules (this pattern)
+├── README.md           ← Collaboration rules + document registry
 ├── protocols/          ← Confirmed interfaces (change-controlled)
-├── proposals/          ← Draft proposals (free to edit)
+├── proposals/          ← Draft proposals (free to edit unilaterally)
 └── decisions/          ← Cross-team decision log
 ```
 
-Both teams' AI assistants are configured to **read from this directory** when working on integration topics.
+- Proposals move to protocols/ after both sides confirm
+- SemVer on confirmed documents (MAJOR for breaking changes)
+- YAML front matter in each file: `from`, `to`, `status`, `version`
+
+**When to move up:** when you need a PR trail or when multiple people might edit the same file.
+
+---
+
+### Full (distributed teams, public APIs, formal change control)
+
+- Git repository for shared-protocols/ (not just a local directory)
+- PRs required to merge into protocols/
+- Changelog maintained per document
+- Old MAJOR versions retained during migration window
+
+---
+
+## The Pattern in Full (Standard scale)
+
+Both sides' AI assistants are configured to **read from the protocols/ directory** when working on integration topics.
 
 ---
 
