@@ -92,14 +92,51 @@ phase_name: [Name]
 ## Acceptance Criteria (copied from ROADMAP)
 - [ ] Condition 1
 - [ ] Condition 2
+
+## Technical Insights (persistent — never cleared on Phase rotation)
+- [YYYY-MM-DD] [Finding] → source: [topic / document]
 ```
 
 **Hard rules:**
-- If file exceeds ~100 lines → information wasn't archived on time → clean immediately
+- If file exceeds ~100 lines → information wasn’t archived on time → clean immediately
 - `Phase Decisions` table clears on Phase completion (content moves to archive)
 - `Acceptance Criteria` section is a direct copy from ROADMAP — no paraphrasing
+- `Technical Insights` section **survives Phase rotation** — it is never cleared
 
 ---
+
+---
+
+## Layer 2 Supplement: Technical Insights Persistent Zone
+
+The clearable sections of `session_state.md` solve phase-by-phase context loss.
+The Persistent Zone solves a different problem: **the AI forgets hard-won lessons across phases**.
+
+When a session discovers a non-obvious rule, a trap, or a design principle that
+will apply to future work, it belongs in `## Technical Insights`.
+
+**Example entries:**
+```markdown
+## Technical Insights (persistent — never cleared on Phase rotation)
+- [2024-03-15] Migration scripts must run inside a transaction; partial migrations
+  leave the DB in a broken state → source: Phase 2 incident
+- [2024-04-02] The runtime YAML config overrides Python class defaults; changing
+  a flag in code requires also updating the deployed YAML → source: Phase 3 debug
+```
+
+**Graduation rule** — when an insight has been referenced more than twice, or proven
+generally applicable, promote it out of `session_state.md` into a durable document:
+
+```
+Insight referenced 2+ times / proven cross-cutting?
+  ├─ YES, project-wide    → add to relevant TYPE-A doc in docs/
+  ├─ YES, module-specific → add to that module’s README or TYPE-B doc
+  └─ NO                   → keep in session_state Technical Insights
+After promotion, append → promoted to [doc path] at the end of the insight line.
+```
+
+This prevents the same trap from being rediscovered in every new phase.
+
 
 ## Layer 3: Operational Footer
 
@@ -116,6 +153,22 @@ Every AI reply in a multi-step task **must end** with a status footer. This keep
 - Footer is the **visible mirror** of session_state.md — they must be consistent
 - Phase progress symbols shown inline: `✅` done · `🔄` current · `○` not started
 - Current phase steps come from ROADMAP sub-task table — not invented ad hoc
+
+### Multi-Project Variant
+
+When the workspace contains **multiple interdependent projects** (monorepo, multi-repo, or workspace), extend the footer with one line per project:
+
+```
+📍 Phase N — {name} | Step {M}
+  🛠️ project-a: {status/action}
+  💻 project-b: {status/action}
+  → Next: {next action}
+```
+
+**Rules:**
+- Each project line always appears — write `no changes` for uninvolved projects
+- Only the project(s) affected by the current Phase need detailed status
+- This prevents the common failure mode where AI forgets to update one side of a cross-project change
 
 ---
 

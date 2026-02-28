@@ -34,6 +34,14 @@ phase_name: [Phase Name]
 - [ ] [Exact text from ROADMAP]
 - [ ] [Exact text from ROADMAP]
 
+## Technical Insights (persistent — never cleared on Phase rotation)
+
+<!-- Add findings here when the AI discovers non-obvious rules, traps, or design
+     principles that will apply to future phases. This section survives Phase rotation.
+     When an insight is referenced 2+ times, promote it to the relevant TYPE-A doc. -->
+
+- [YYYY-MM-DD] [Finding] → source: [topic / document]
+
 ---
 ## Notes for the AI
 
